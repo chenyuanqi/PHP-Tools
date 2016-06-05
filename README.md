@@ -20,10 +20,10 @@ xdebug.profiler_output_dir = "f:/laragon/tmp"
 在 mysql.ini 配置文件中加入如下配置，并重启 mysql 服务
 <h6>[v5.5以上的配置]</h6>
 [mysqld]
-*general_log= ON*
-*general_log_file = "E:/program/data/mysql_log.log"*
---------------------------------------------------
-[v5.5以下的配置]
+general_log= ON
+general_log_file = "E:/program/data/mysql_log.log"
+
+<h6>[v5.5以下的配置]</h6>
 log=E:/program/data/mysql_log.log
 
 <h5>Tools 宗旨及愿景？</h5>
