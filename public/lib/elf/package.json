@@ -1,0 +1,27 @@
+{
+  "name": "elf-css",
+  "version": "0.0.5",
+  "description": "a light and clean responsive css framework",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jrainlau/elf.git"
+  },
+  "keywords": [
+    "elf",
+    "responsive",
+    "css3",
+    "framework"
+  ],
+  "author": "jrainlau",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jrainlau/elf/issues"
+  },
+  "homepage": "https://github.com/jrainlau/elf#readme"
+}

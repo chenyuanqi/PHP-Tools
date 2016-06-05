@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+    <title>PHP 运算符优先级</title>
+    <link rel="stylesheet" href="../public/lib/elf/css/elf.css"/>
+</head>
+
+<body>
+<main class="elf">
+    <table class="table-responsive">
+        <thead>
+        <tr>
+            <th width="8%">结合方向</th>
+            <th>运算符</th>
+            <th>附加信息</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>非结合</td>
+            <td>clone new</td>
+            <td>clone 和 new</td>
+        </tr>
+        <tr>
+            <td>左</td>
+            <td>[</td>
+            <td>array()</td>
+        </tr>
+        <tr>
+            <td>非结合</td>
+            <td>++ --</td>
+            <td>递增／递减运算符</td>
+        </tr>
+        <tr>
+            <td>非结合</td>
+            <td>~ - (int) (float) (string) (array) (object) (bool) @</td>
+            <td>类型</td>
+        </tr>
+        <tr>
+            <td>非结合</td>
+            <td>instanceof</td>
+            <td>类型</td>
+        </tr>
+        <tr>
+            <td>右结合</td>
+            <td>!</td>
+            <td>逻辑操作符</td>
+        </tr>
+        <tr>
+            <td>左</td>
+            <td>* / %</td>
+            <td>算术运算符</td>
+        </tr>
+        <tr>
+            <td>左</td>
+            <td>+ - .</td>
+            <td>算术运算符 和 字符串运算符</td>
+        </tr>
+        <tr>
+            <td>左</td>
+            <td><< >></td>
+            <td>位运算符</td>
+        </tr>
+        <tr>
+            <td>非结合</td>
+            <td>< <= > >= <></td>
+            <td>比较运算符</td>
+        </tr>
+        <tr>
+            <td>非结合</td>
+            <td>== != === !==</td>
+            <td>比较运算符</td>
+        </tr>
+        <tr>
+            <td>左</td>
+            <td>&</td>
+            <td>位运算符 和 引用</td>
+        </tr>
+        <tr>
+            <td>左</td>
+            <td>^</td>
+            <td>位运算符</td>
+        </tr>
+        <tr>
+            <td>左</td>
+            <td>|</td>
+            <td>位运算符</td>
+        </tr>
+        <tr>
+            <td>左</td>
+            <td>&&</td>
+            <td>逻辑运算符</td>
+        </tr>
+        <tr>
+            <td>左</td>
+            <td>||</td>
+            <td>逻辑运算符</td>
+        </tr>
+        <tr>
+            <td>左</td>
+            <td>? :</td>
+            <td>三元运算符</td>
+        </tr>
+        <tr>
+            <td>右</td>
+            <td>= += -= *= /= .= %= &= |= ^= <<= >>=</td>
+            <td>赋值运算符</td>
+        </tr>
+        <tr>
+            <td>左</td>
+            <td>and</td>
+            <td>逻辑运算符</td>
+        </tr>
+        <tr>
+            <td>左</td>
+            <td>xor</td>
+            <td>逻辑运算符</td>
+        </tr>
+        <tr>
+            <td>左</td>
+            <td>or</td>
+            <td>逻辑运算符</td>
+        </tr>
+        <tr>
+            <td>左</td>
+            <td>,</td>
+            <td>多处用到</td>
+        </tr>
+        </tbody>
+    </table>
+</main>
+</body>
+</html>
