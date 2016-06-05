@@ -10,11 +10,13 @@ php 工具集合
 
 <h5>如何配置并使用 webgrind?</h5>
 首先, webgrind 使用的前提是安装 xdebug (自行检索安装),并配置好 xdebug 的 profile 项，如下：
+```
 xdebug.remote_enable = off
 xdebug.profiler_enable = on
 xdebug.profiler_enable_trigger = on
 xdebug.profiler_output_name = cachegrind.out.%t.%p
 xdebug.profiler_output_dir = "f:/laragon/tmp"
+```
 
 <h5>如何使用 mysql 日志追踪?</h5>
 在 mysql.ini 配置文件中加入如下配置，并重启 mysql 服务
