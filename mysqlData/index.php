@@ -10,20 +10,26 @@ $dbusername = $_CFG['mysql_user'];
 $dbpassword = $_CFG['mysql_pwd'];
 $database   = $_CFG['mysql_db'];
 
+try {
+    $mysql_conn = new PDO('mysql:host='.$dbserver.';dbname='.$database, $dbusername, $dbpassword, [ PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES "UTF8"' ]);
+} catch (PDOException $e) {
+    echo 'Connection failed: '.$e->getMessage();
+}
+
 //其他配置
-$mysql_conn = @mysql_connect("$dbserver", "$dbusername", "$dbpassword") or die("Mysql connect is error.");
-mysql_select_db($database, $mysql_conn);
-mysql_query('SET NAMES utf8', $mysql_conn);
-$table_result = mysql_query('show tables', $mysql_conn);
+$sql       = 'show tables';
+$statement = $mysql_conn->prepare($sql);
+$statement->execute();
+$table_result = $statement->fetchAll(PDO::FETCH_NUM);
 
 $no_show_table = array();    //不需要显示的表
-$no_show_field = array();   //不需要显示的字段
+$no_show_field = array();    //不需要显示的字段
 
 //取得所有的表名
 $tables = array();
-while($row = mysql_fetch_array($table_result)){
-    if(!in_array($row[0],$no_show_table)){
-        $tables[]['TABLE_NAME'] = $row[0];
+foreach($table_result as $value) {
+    if(!in_array($value[0],$no_show_table)){
+        $tables[]['TABLE_NAME'] = $value[0];
     }
 }
 
@@ -36,7 +42,9 @@ if(!empty($_GET['prefix'])){
         if($string[0] != $prefix){
             $string[0] = $prefix;
             $newTableName = implode('_', $string);
-            mysql_query('rename table '.$tableName.' TO '.$newTableName);
+            $sql = 'rename table '.$tableName.' TO '.$newTableName;
+            $statement = $mysql_conn->prepare($sql);
+            $statement->execute();
         }
     }
     echo "替换成功！";exit();
@@ -48,10 +56,11 @@ foreach ($tables as $k=>$v) {
     $sql .= 'INFORMATION_SCHEMA.TABLES ';
     $sql .= 'WHERE ';
     $sql .= "table_name = '{$v['TABLE_NAME']}'  AND table_schema = '{$database}'";
-    $table_result = mysql_query($sql, $mysql_conn);
-    while ($t = mysql_fetch_array($table_result) ) {
-        $tables[$k]['TABLE_COMMENT'] = $t['TABLE_COMMENT'];
-    }
+    $statement = $mysql_conn->prepare($sql);
+    $statement->execute();
+
+    $t = $statement->fetchALL(PDO::FETCH_ASSOC);
+    $tables[$k]['TABLE_COMMENT'] = $t[0]['TABLE_COMMENT'];
 
     $sql  = 'SELECT * FROM ';
     $sql .= 'INFORMATION_SCHEMA.COLUMNS ';
@@ -59,19 +68,20 @@ foreach ($tables as $k=>$v) {
     $sql .= "table_name = '{$v['TABLE_NAME']}' AND table_schema = '{$database}'";
 
     $fields = array();
-    $field_result = mysql_query($sql, $mysql_conn);
-    while ($t = mysql_fetch_array($field_result) ) {
-        $fields[] = $t;
+    $statement = $mysql_conn->prepare($sql);
+    $statement->execute();
+    $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+    foreach($result as $item) {
+        $fields[] = $item;
     }
+
     $tables[$k]['COLUMN'] = $fields;
 }
-mysql_close($mysql_conn);
-
 
 $html = '';
 //循环所有表
 foreach ($tables as $k=>$v) {
-    if(!in_array($v['TABLE_NAME'], $no_show_table)){
+    if(!in_array($v['TABLE_NAME'][0], $no_show_table)){
         $html .= '  <h3>' . ($k + 1) . '、' .'  （'. $v['TABLE_NAME']. '）</h3>'."\n";
         $html .= '  <table border="1" cellspacing="0" cellpadding="0" width="100%">'."\n";
         $html .= '      <tbody>'."\n";
