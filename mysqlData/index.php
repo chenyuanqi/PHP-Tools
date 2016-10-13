@@ -82,7 +82,7 @@ $html = '';
 //循环所有表
 foreach ($tables as $k=>$v) {
     if(!in_array($v['TABLE_NAME'][0], $no_show_table)){
-        $html .= '  <h3>' . ($k + 1) . '、' .'  （'. $v['TABLE_NAME']. '）</h3>'."\n";
+        $html .= '  <h3>' . ($k + 1) . '、' .$v['TABLE_COMMENT'].'  （'. $v['TABLE_NAME']. '）</h3>'."\n";
         $html .= '  <table border="1" cellspacing="0" cellpadding="0" width="100%">'."\n";
         $html .= '      <tbody>'."\n";
         $html .= '          <tr>'."\n";
